@@ -16,15 +16,20 @@ object ApiClient {
         .add(KotlinJsonAdapterFactory())
         .build()
 
-    private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .build()
+    fun createRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
+    }
 
-    val apiService: ApiService = retrofit.create(ApiService::class.java)
+    fun createApiService(): ApiService {
+        val retrofit = createRetrofit()
+        return retrofit.create(ApiService::class.java)
+    }
 }
 
 interface ApiService {
     @GET("anime")
-    fun getAnime(@Query("page") page: String): Call<AnimeResponse>
+    fun getAnime(@Query("q") page: String): Call<AnimeResponse>
 }

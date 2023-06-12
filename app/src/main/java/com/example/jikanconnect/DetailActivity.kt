@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
+import com.bumptech.glide.Glide
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var imageView: ImageView
@@ -28,7 +29,10 @@ class DetailActivity : AppCompatActivity() {
         val actionBar: ActionBar? = supportActionBar
         actionBar?.setTitle("Detail Anime")
 
-        imageView.load(gambar)
+        Glide.with(imageView.context).apply{
+            load(gambar)
+                .into(imageView)
+        }
         judulTextView.text=nama
         synopsisTextView.text=sinopsis
 
