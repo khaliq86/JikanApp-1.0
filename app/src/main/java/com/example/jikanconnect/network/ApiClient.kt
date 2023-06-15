@@ -32,4 +32,6 @@ object ApiClient {
 interface ApiService {
     @GET("anime")
     fun getAnime(@Query("q") page: String): Call<AnimeResponse>
+    @GET("anime")
+    fun getAnimeStatus(@Query("status") status: String): Call<AnimeResponse>
 }

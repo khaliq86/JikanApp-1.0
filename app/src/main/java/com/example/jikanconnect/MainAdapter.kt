@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.bumptech.glide.Glide
 
-class MainAdapter(private val animeList: List<Anime>, private val context:MainActivity) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+class MainAdapter(private var animeList: List<Anime>, private val context:MainActivity) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_item, parent, false)
         return MainViewHolder(view)
@@ -35,12 +35,10 @@ class MainAdapter(private val animeList: List<Anime>, private val context:MainAc
             nameTextView.text = anime.name
             durationTextView.text = anime.duration
             synopsisTextView.text = anime.synopsis
-//            imageView.load(anime.images.jpg.image_url)
-            Glide.with(imageView.context).apply{
-                load(anime.images.jpg.image_url)
-                    .into(imageView)
-            }
-
+            Glide.with(imageView.context).apply {
+                load(anime.images.jpg.image_url).
+                placeholder(R.drawable.loading_animation).
+                into(imageView)}
 
             itemView.setOnClickListener {
                 val intent = Intent (context, DetailActivity::class.java).apply {

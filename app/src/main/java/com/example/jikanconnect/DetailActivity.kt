@@ -1,6 +1,7 @@
 package com.example.jikanconnect
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
@@ -30,11 +31,16 @@ class DetailActivity : AppCompatActivity() {
         actionBar?.setTitle("Detail Anime")
 
         Glide.with(imageView.context).apply{
-            load(gambar)
+            load(gambar).placeholder(R.drawable.loading_animation)
                 .into(imageView)
         }
         judulTextView.text=nama
         synopsisTextView.text=sinopsis
+
+        val button = findViewById<Button>(R.id.button)
+        button.setOnClickListener {
+            finish()
+        }
 
     }
 }
